@@ -14,6 +14,7 @@ from info import CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_C
 from utils import get_settings, get_size, is_req_subscribed, save_group_settings, temp, verify_user, check_token, check_verification, get_token, get_shortlink, get_tutorial
 from database.connections_mdb import active_connection
 # from plugins.pm_filter import ENABLE_SHORTLINK
+from .pm_filter import auto_filter 
 import re, asyncio, os, sys
 import json
 import base64
@@ -169,12 +170,12 @@ async def start(client, message):
             parse_mode=enums.ParseMode.HTML
         )
         return  
-
-if len(message.command) == 2 and message.command[1].startswith('getfile'):
+    if len(message.command) == 2 and message.command[1].startswith('getfile'):
         movies = message.command[1].split("-", 1)[1] 
         movie = movies.replace('-',' ')
         message.text = movie 
         await auto_filter(client, message) 
+        return
         
     data = message.command[1]
     try:
