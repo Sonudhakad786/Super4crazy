@@ -4,6 +4,7 @@ import random
 import asyncio
 import pytz
 from Script import script
+from .pm_filter import auto_filter
 from datetime import datetime
 from pyrogram import Client, filters, enums
 from pyrogram.errors import ChatAdminRequired, FloodWait
